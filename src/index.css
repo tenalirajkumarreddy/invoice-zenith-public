@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Billing Software Design System - Light & Dark Theme
+All colors MUST be HSL for consistency
+*/
+
+@layer base {
+  :root {
+    /* Light billing theme - clean and professional */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 222.2 84% 4.9%; /* Dark text */
+
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%; /* Professional blue */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%; /* Light gray */
+    --secondary-foreground: 222.2 84% 4.9%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 340 82% 67%; /* Pink accent for important actions */
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142 76% 36%; /* Green for paid status */
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%; /* Orange for pending */
+    --warning-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.75rem;
+
+    /* Custom billing gradients for light theme */
+    --gradient-primary: linear-gradient(135deg, hsl(221.2 83.2% 53.3%) 0%, hsl(221.2 83.2% 43.3%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(340 82% 67%) 0%, hsl(340 82% 57%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(142 76% 26%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+
+    /* Shadows for depth in light theme */
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.1);
+    --shadow-elevated: 0 8px 40px -4px hsl(0 0% 0% / 0.15);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Sidebar theme for light mode */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222.2 84% 4.9%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
+  }
+
+  .dark {
+    /* Dark billing theme - inspired by professional financial software */
+    --background: 225 15% 12%; /* #1E1E2F */
+    --foreground: 210 40% 98%;
+
+    --card: 225 15% 16%; /* #2A2A3B */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 225 15% 16%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 213 93% 68%; /* #4C9AFF - Bright blue accent */
+    --primary-foreground: 225 15% 12%;
+
+    --secondary: 225 15% 25%; /* #404053 */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 225 15% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 340 82% 67%; /* #FF5C8A - Pink accent for important actions */
+    --accent-foreground: 225 15% 12%;
+
+    --success: 142 71% 45%; /* Green for paid status */
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%; /* Orange for pending */
+    --warning-foreground: 225 15% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 225 15% 25%;
+    --input: 225 15% 25%;
+    --ring: 213 93% 68%;
+
+    /* Custom billing gradients for dark theme */
+    --gradient-primary: linear-gradient(135deg, hsl(213 93% 68%) 0%, hsl(213 93% 58%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(340 82% 67%) 0%, hsl(340 82% 57%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 71% 45%) 0%, hsl(142 71% 35%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(225 15% 16%) 0%, hsl(225 15% 18%) 100%);
+
+    /* Shadows for depth in dark theme */
+    --shadow-card: 0 4px 20px -2px hsl(225 15% 8% / 0.4);
+    --shadow-elevated: 0 8px 40px -4px hsl(225 15% 8% / 0.6);
+
+    /* Sidebar theme for dark mode */
+    --sidebar-background: 225 15% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 213 93% 68%;
+    --sidebar-primary-foreground: 225 15% 12%;
+    --sidebar-accent: 225 15% 18%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 225 15% 20%;
+    --sidebar-ring: 213 93% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Improve touch targets */
+  button, 
+  [role="button"], 
+  input, 
+  select, 
+  textarea {
+    min-height: 44px;
+  }
+  
+  /* Better spacing for mobile */
+  .space-y-6 > * + * {
+    margin-top: 1rem;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 0.75rem;
+  }
+  
+  /* Improve text readability */
+  .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+/* Mobile-first scrolling improvements */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Better modal sizing on mobile */
+@media (max-width: 640px) {
+  [data-radix-popper-content-wrapper] {
+    transform: none !important;
+    position: fixed !important;
+    inset: 1rem !important;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+/* Line clamp utilities for text truncation */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
