@@ -1,10 +1,10 @@
-# Invoice Zenith Billing Hub 🚀
+# BillMate Billing Hub 🚀
 
 ## 🌐 Open Source Notice
 
 This project is now open source! All authentication uses dummy credentials for demonstration purposes. No secrets or private keys are required.
 
-**GitHub Repo:** [https://github.com/tenalirajkumarreddy/invoice-zenith-public](https://github.com/tenalirajkumarreddy/invoice-zenith-public)
+**GitHub Repo:** [https://github.com/tenalirajkumarreddy/billmate-public](https://github.com/tenalirajkumarreddy/billmate-public)
 
 ## 🔑 Dummy Login Credentials
 
@@ -25,7 +25,7 @@ Social links (GitHub, LinkedIn, X, WhatsApp) are displayed on the login page. Yo
 ```
 // src/config/socials.ts
 export const socials = [
-   { name: 'GitHub', url: 'https://github.com/tenalirajkumarreddy/invoice-zenith-public', icon: 'github' },
+   { name: 'GitHub', url: 'https://github.com/tenalirajkumarreddy/billmate-public', icon: 'github' },
    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/tenalirajkumarreddy/', icon: 'linkedin' },
    { name: 'X', url: 'https://x.com/tenalirajkumar', icon: 'x' },
    { name: 'WhatsApp', url: 'https://wa.me/919000000000', icon: 'whatsapp' },
@@ -35,7 +35,7 @@ export const socials = [
 
 ## 📋 Project Overview
 
-**Invoice Zenith Billing Hub** is a comprehensive, full-stack billing and route management system designed for distribution businesses. It provides end-to-end functionality for managing delivery agents, route assignments, customer billing, inventory tracking, and business analytics.
+**BillMate Billing Hub** is a comprehensive, full-stack billing and route management system designed for distribution businesses. It provides end-to-end functionality for managing delivery agents, route assignments, customer billing, inventory tracking, and business analytics.
 
 **Live Project URL**: https://lovable.dev/projects/c4b8cde0-449e-40a4-914b-9a4674676cf4
 
@@ -277,8 +277,8 @@ git clone <YOUR_GIT_URL>
 ### **Local Development**
 ```bash
 # Clone repository
-git clone https://github.com/tenalirajkumarreddy/invoice-zenith-public.git
-cd invoice-zenith-public
+git clone https://github.com/tenalirajkumarreddy/billmate-public.git
+cd billmate-public
 
 # Install dependencies
 npm install

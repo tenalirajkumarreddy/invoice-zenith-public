@@ -16,7 +16,7 @@ export default function Layout({ children }: LayoutProps) {
             <SidebarTrigger className="mr-2 sm:mr-4" />
             <div className="flex-1 min-w-0">
               <h1 className="text-base sm:text-xl font-semibold text-foreground truncate">
-                InvoiceZenith Billing Hub
+                BillMate Billing Hub
               </h1>
             </div>
             <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">

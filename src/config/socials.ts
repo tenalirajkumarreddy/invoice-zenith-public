@@ -2,7 +2,7 @@
 export const socials = [
   {
     name: 'GitHub',
-    url: 'https://github.com/tenalirajkumarreddy/invoice-zenith-public',
+  url: 'https://github.com/tenalirajkumarreddy/billmate-public',
     icon: 'github',
   },
   {

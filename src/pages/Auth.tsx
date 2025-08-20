@@ -67,13 +67,13 @@ export default function Auth() {
               <FileText className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">InvoiceZenith</h1>
+              <h1 className="text-2xl font-bold text-foreground">BillMate</h1>
               <p className="text-sm text-muted-foreground">Billing & Route Management</p>
             </div>
           </div>
           <div className="mt-2 flex flex-col items-center gap-2">
             <a
-              href="https://github.com/tenalirajkumarreddy/invoice-zenith-public"
+              href="https://github.com/tenalirajkumarreddy/billmate-public"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded bg-primary text-primary-foreground hover:opacity-90 text-sm font-medium"
@@ -83,7 +83,7 @@ export default function Auth() {
             </a>
             <span className="text-xs text-muted-foreground">
               <a
-                href="https://github.com/tenalirajkumarreddy/invoice-zenith-public"
+                href="https://github.com/tenalirajkumarreddy/billmate-public"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline hover:text-primary"

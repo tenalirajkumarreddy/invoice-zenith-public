@@ -469,7 +469,7 @@ export default function Reports() {
   const generateReportHTML = () => {
     const currentDate = formatDate(new Date());
     const header = generateReportHeader(
-      "Invoice Zenith Billing Hub",
+  "BillMate Billing Hub",
       `${selectedReportType.toUpperCase()} REPORT`,
       currentDate,
       `Period: ${dateRange.replace(/_/g, ' ').toUpperCase()}`

@@ -4,7 +4,7 @@ interface Profile {
   id: string;
   full_name: string;
   role: 'admin' | 'agent' | 'customer';
-}
+  agent_id?: string;
 }
 
 interface AuthContextType {
@@ -28,6 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       full_name: 'Demo Admin',
       role: 'admin',
       id: 'admin-1',
+      agent_id: 'ADM-001',
     },
     {
       email: 'agent@demo.com',
@@ -35,6 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       full_name: 'Demo Agent',
       role: 'agent',
       id: 'agent-1',
+      agent_id: 'AGT-001',
     },
     {
       email: 'customer@demo.com',
@@ -42,6 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       full_name: 'Demo Customer',
       role: 'customer',
       id: 'customer-1',
+      agent_id: undefined,
     },
   ];
 
@@ -50,7 +53,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       (u) => u.email === email && u.password === password
     );
     if (user) {
-      setProfile({ id: user.id, full_name: user.full_name, role: user.role as Profile['role'] });
+      setProfile({ 
+        id: user.id, 
+        full_name: user.full_name, 
+        role: user.role as Profile['role'],
+        agent_id: user.agent_id
+      });
       return { error: null };
     } else {
       setProfile(null);

@@ -67,7 +67,7 @@ export function AppSidebar() {
               <FileText className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h2 className="font-bold text-sidebar-foreground">{settings?.company_name || 'InvoiceZenith'}</h2>
+              <h2 className="font-bold text-sidebar-foreground">{settings?.company_name || 'BillMate'}</h2>
               <p className="text-xs text-muted-foreground">Billing Hub</p>
             </div>
           </div>
@@ -126,7 +126,7 @@ export function AppSidebar() {
           <div className="mt-auto p-4 border-t border-sidebar-border">
             <div className="text-xs text-muted-foreground">
               <p>Version 1.0.0</p>
-              <p>© 2025 {settings?.company_name || 'InvoiceZenith'}</p>
+              <p>© 2025 {settings?.company_name || 'BillMate'}</p>
             </div>
           </div>
         )}
