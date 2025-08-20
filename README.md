@@ -1,5 +1,38 @@
 # Invoice Zenith Billing Hub 🚀
 
+## 🌐 Open Source Notice
+
+This project is now open source! All authentication uses dummy credentials for demonstration purposes. No secrets or private keys are required.
+
+**GitHub Repo:** [https://github.com/tenalirajkumarreddy/invoice-zenith-public](https://github.com/tenalirajkumarreddy/invoice-zenith-public)
+
+## 🔑 Dummy Login Credentials
+
+Use these credentials to log in as different roles:
+
+| Role     | Email                | Password    |
+|----------|----------------------|-------------|
+| Admin    | admin@demo.com       | admin123    |
+| Agent    | agent@demo.com       | agent123    |
+| Customer | customer@demo.com    | customer123 |
+
+No sign-up is required. Only these demo accounts are available in the open source version.
+
+## 🔗 Social Links
+
+Social links (GitHub, LinkedIn, X, WhatsApp) are displayed on the login page. You can edit them in `src/config/socials.ts`.
+
+```
+// src/config/socials.ts
+export const socials = [
+   { name: 'GitHub', url: 'https://github.com/tenalirajkumarreddy/invoice-zenith-public', icon: 'github' },
+   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/tenalirajkumarreddy/', icon: 'linkedin' },
+   { name: 'X', url: 'https://x.com/tenalirajkumar', icon: 'x' },
+   { name: 'WhatsApp', url: 'https://wa.me/919000000000', icon: 'whatsapp' },
+];
+```
+
+
 ## 📋 Project Overview
 
 **Invoice Zenith Billing Hub** is a comprehensive, full-stack billing and route management system designed for distribution businesses. It provides end-to-end functionality for managing delivery agents, route assignments, customer billing, inventory tracking, and business analytics.
@@ -235,23 +268,20 @@ Customer Order → Cart Items → Payment Selection → Order Creation → Invoi
 
 ## 🛠️ Development Setup
 
+git clone <YOUR_GIT_URL>
+
 ### **Prerequisites**
 - Node.js 18+ and npm
-- Supabase account and project
 - Git for version control
 
 ### **Local Development**
 ```bash
 # Clone repository
-git clone <YOUR_GIT_URL>
-cd invoice-zenith-billing-hub
+git clone https://github.com/tenalirajkumarreddy/invoice-zenith-public.git
+cd invoice-zenith-public
 
 # Install dependencies
 npm install
-
-# Environment setup
-cp .env.example .env.local
-# Add your Supabase URL and anon key
 
 # Start development server
 npm run dev
@@ -260,18 +290,7 @@ npm run dev
 npm run build
 ```
 
-### **Database Setup**
-1. Create Supabase project
-2. Run provided SQL migrations
-3. Enable Row Level Security (RLS)
-4. Configure authentication settings
-5. Set up real-time subscriptions
-
-### **Environment Variables**
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+No environment variables or database setup required for the open source version. All authentication and data are handled with demo accounts and local state.
 
 ---
 

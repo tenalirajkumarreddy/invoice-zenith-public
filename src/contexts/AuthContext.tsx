@@ -1,173 +1,71 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
+import { createContext, useContext, useState } from 'react';
 
 interface Profile {
   id: string;
-  user_id: string;
   full_name: string;
-  phone: string | null;
-  role: 'admin' | 'agent';
-  agent_id: string | null;
-  is_active: boolean;
+  role: 'admin' | 'agent' | 'customer';
+}
 }
 
 interface AuthContextType {
-  user: User | null;
-  session: Session | null;
   profile: Profile | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, fullName: string, phone?: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          // Fetch user profile
-          setTimeout(async () => {
-            try {
-              const { data: profileData, error } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('user_id', session.user.id)
-                .maybeSingle();
-              
-              if (error) {
-                console.error('Profile fetch error:', error);
-              }
-              
-              setProfile(profileData as Profile);
-            } catch (error) {
-              console.error('Profile fetch error:', error);
-            } finally {
-              setLoading(false);
-            }
-          }, 0);
-        } else {
-          setProfile(null);
-          setLoading(false);
-        }
-      }
-    );
-
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        // Fetch user profile
-        (async () => {
-          try {
-            const { data: profileData, error } = await supabase
-              .from('profiles')
-              .select('*')
-              .eq('user_id', session.user.id)
-              .maybeSingle();
-            
-            if (error) {
-              console.error('Profile fetch error:', error);
-            }
-            
-            setProfile(profileData as Profile);
-          } catch (error) {
-            console.error('Profile fetch error:', error);
-          } finally {
-            setLoading(false);
-          }
-        })();
-      } else {
-        setLoading(false);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  // Dummy credentials for open source
+  const dummyUsers = [
+    {
+      email: 'admin@demo.com',
+      password: 'admin123',
+      full_name: 'Demo Admin',
+      role: 'admin',
+      id: 'admin-1',
+    },
+    {
+      email: 'agent@demo.com',
+      password: 'agent123',
+      full_name: 'Demo Agent',
+      role: 'agent',
+      id: 'agent-1',
+    },
+    {
+      email: 'customer@demo.com',
+      password: 'customer123',
+      full_name: 'Demo Customer',
+      role: 'customer',
+      id: 'customer-1',
+    },
+  ];
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { error };
-  };
-
-  const signUp = async (email: string, password: string, fullName: string, phone?: string) => {
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-            phone: phone,
-          },
-          emailRedirectTo: `${window.location.origin}/`,
-        },
-      });
-
-      if (error) {
-        console.error('Signup error:', error);
-        return { error };
-      }
-
-      // Always try to create profile manually as backup
-      if (data.user) {
-        try {
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .insert({
-              user_id: data.user.id,
-              full_name: fullName,
-              phone: phone,
-              role: 'agent',
-              agent_id: `AGT-${Date.now().toString().slice(-5)}`,
-            });
-
-          if (profileError && profileError.code !== '23505') { // Ignore duplicate key errors
-            console.error('Profile creation error:', profileError);
-          }
-        } catch (profileError) {
-          console.error('Profile creation exception:', profileError);
-        }
-      }
-
+    const user = dummyUsers.find(
+      (u) => u.email === email && u.password === password
+    );
+    if (user) {
+      setProfile({ id: user.id, full_name: user.full_name, role: user.role as Profile['role'] });
       return { error: null };
-    } catch (error) {
-      console.error('Signup exception:', error);
-      return { error };
+    } else {
+      setProfile(null);
+      return { error: 'Invalid credentials' };
     }
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setSession(null);
     setProfile(null);
   };
 
   const value = {
-    user,
-    session,
     profile,
     loading,
     signIn,
-    signUp,
     signOut,
   };
 
