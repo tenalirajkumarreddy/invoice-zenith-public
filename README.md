@@ -2,7 +2,7 @@
 
 ## 🌐 Open Source Notice
 
-This project is now open source! All authentication uses dummy credentials for demonstration purposes. No secrets or private keys are required..eedd
+This project is now open source! All authentication uses dummy credentials for demonstration purposes. No secrets or private keys are required..eedds
 
 **GitHub Repo:** [https://github.com/tenalirajkumarreddy/billmate-public](https://github.com/tenalirajkumarreddy/billmate-public)
 
