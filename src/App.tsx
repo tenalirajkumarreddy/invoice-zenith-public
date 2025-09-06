@@ -26,115 +26,32 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode; allowedRoles: string[] }) {
-  const { user, profile, loading } = useAuth();
-  
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-  
-  if (!user || !profile) {
-    return <Navigate to="/auth" replace />;
-  }
-  
-  if (!allowedRoles.includes(profile.role)) {
-    return <Navigate to={profile.role === 'admin' ? '/' : '/agent'} replace />;
-  }
-  
+  // Skip authentication - allow public access
   return <>{children}</>;
 }
 
 function AppRoutes() {
-  const { user, profile, loading } = useAuth();
-  
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-  
+  // Skip authentication check - allow public access
   return (
     <Routes>
-      {/* Auth Route */}
-      <Route 
-        path="/auth" 
-        element={user && profile ? <Navigate to={profile.role === 'admin' ? '/' : '/agent'} replace /> : <Auth />} 
-      />
+      {/* Public Routes - No Authentication Required */}
       
-      {/* Admin Routes */}
-      <Route path="/" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Index /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/orders" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Orders /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/invoices" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Invoices /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/invoice-review/:orderId" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><InvoiceReview /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/customers" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Customers /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/products" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Products /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/routes" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><RoutesPage /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/route-management" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><RouteManagement /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/route-assignment" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><RouteAssignment /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/reports" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Reports /></AdminLayout>
-        </ProtectedRoute>
-      } />
-      <Route path="/settings" element={
-        <ProtectedRoute allowedRoles={['admin']}>
-          <AdminLayout><Settings /></AdminLayout>
-        </ProtectedRoute>
-      } />
+      {/* Admin Routes - Now Public */}
+      <Route path="/" element={<AdminLayout><Index /></AdminLayout>} />
+      <Route path="/auth" element={<AdminLayout><Index /></AdminLayout>} />
+      <Route path="/orders" element={<AdminLayout><Orders /></AdminLayout>} />
+      <Route path="/invoices" element={<AdminLayout><Invoices /></AdminLayout>} />
+      <Route path="/invoice-review/:orderId" element={<AdminLayout><InvoiceReview /></AdminLayout>} />
+      <Route path="/customers" element={<AdminLayout><Customers /></AdminLayout>} />
+      <Route path="/products" element={<AdminLayout><Products /></AdminLayout>} />
+      <Route path="/routes" element={<AdminLayout><RoutesPage /></AdminLayout>} />
+      <Route path="/route-management" element={<AdminLayout><RouteManagement /></AdminLayout>} />
+      <Route path="/route-assignment" element={<AdminLayout><RouteAssignment /></AdminLayout>} />
+      <Route path="/reports" element={<AdminLayout><Reports /></AdminLayout>} />
+      <Route path="/settings" element={<AdminLayout><Settings /></AdminLayout>} />
       
-      {/* Agent Routes */}
-      <Route path="/agent" element={
-        <ProtectedRoute allowedRoles={['agent']}>
-          <AgentLayout><DeliveryAgent /></AgentLayout>
-        </ProtectedRoute>
-      } />
+      {/* Agent Routes - Now Public */}
+      <Route path="/agent" element={<AgentLayout><DeliveryAgent /></AgentLayout>} />
       
       {/* Catch-all */}
       <Route path="*" element={<NotFound />} />

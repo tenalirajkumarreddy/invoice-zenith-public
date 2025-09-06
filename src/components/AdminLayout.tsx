@@ -29,7 +29,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <SidebarTrigger className="mr-2 sm:mr-4" />
             <div className="flex-1 min-w-0">
               <h1 className="text-lg font-semibold text-foreground truncate">
-                {settings?.company_name || 'BillMate'} - Admin Panel
+                {settings?.company_name || 'InvoiceZenith'} - Admin Panel
               </h1>
             </div>
             <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">

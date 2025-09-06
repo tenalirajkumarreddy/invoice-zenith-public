@@ -1,79 +1,70 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { User, Session } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Profile {
   id: string;
+  user_id: string;
   full_name: string;
-  role: 'admin' | 'agent' | 'customer';
-  agent_id?: string;
+  phone: string | null;
+  role: 'admin' | 'agent';
+  agent_id: string | null;
+  is_active: boolean;
 }
 
 interface AuthContextType {
+  user: User | null;
+  session: Session | null;
   profile: Profile | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, fullName: string, phone?: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(false);
+  // Mock auth state for public access
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<Profile | null>({
+    id: 'mock-profile-id',
+    user_id: 'mock-user-id',
+    full_name: 'Demo Admin',
+    phone: '+91 98765 43210',
+    role: 'admin',
+    agent_id: 'ADMIN-001',
+    is_active: true
+  });
+  const [loading, setLoading] = useState(false); // No loading for public access
 
-  // Dummy credentials for open source
-  const dummyUsers = [
-    {
-      email: 'admin@demo.com',
-      password: 'admin123',
-      full_name: 'Demo Admin',
-      role: 'admin',
-      id: 'admin-1',
-      agent_id: 'ADM-001',
-    },
-    {
-      email: 'agent@demo.com',
-      password: 'agent123',
-      full_name: 'Demo Agent',
-      role: 'agent',
-      id: 'agent-1',
-      agent_id: 'AGT-001',
-    },
-    {
-      email: 'customer@demo.com',
-      password: 'customer123',
-      full_name: 'Demo Customer',
-      role: 'customer',
-      id: 'customer-1',
-      agent_id: undefined,
-    },
-  ];
+  useEffect(() => {
+    // Mock initialization - no real auth needed
+    setLoading(false);
+  }, []);
 
   const signIn = async (email: string, password: string) => {
-    const user = dummyUsers.find(
-      (u) => u.email === email && u.password === password
-    );
-    if (user) {
-      setProfile({ 
-        id: user.id, 
-        full_name: user.full_name, 
-        role: user.role as Profile['role'],
-        agent_id: user.agent_id
-      });
-      return { error: null };
-    } else {
-      setProfile(null);
-      return { error: 'Invalid credentials' };
-    }
+    // Mock sign in - always return success for demo
+    return { error: null };
+  };
+
+  const signUp = async (email: string, password: string, fullName: string, phone?: string) => {
+    // Mock sign up - always return success for demo
+    return { error: null };
   };
 
   const signOut = async () => {
-    setProfile(null);
+    // Mock sign out - no action needed
   };
 
   const value = {
+    user,
+    session,
     profile,
     loading,
     signIn,
+    signUp,
     signOut,
   };
 
